@@ -1,28 +1,37 @@
 import 'package:starwars/model/data_source.dart';
 
-class NewsModel {
-  late DataSource source;
+class News {
+  DataSource? source;
 
-  String author;
-  String title;
-  String description;
-  String url;
+  String? author;
+  String? title;
+  String? description;
+  String? url;
+  String? urlToImage;
+  String? publishedAt;
+  String? content;
 
-  NewsModel({
-    required this.author,
-    required this.description,
-    required this.title,
-    required this.source,
-    required this.url,
+  News({
+    this.author,
+    this.description,
+    this.title,
+    this.source,
+    this.url,
+    this.urlToImage,
+    this.publishedAt,
+    this.content,
   });
 
-  factory NewsModel.fromJson(Map<String, dynamic> json) {
-    return NewsModel(
+  factory News.fromJson(Map<String, dynamic> json) {
+    return News(
+      source: DataSource.fromJson(json['source']),
       author: json['author'],
-      description: json['description'],
       title: json['title'],
-      source: json['source'],
+      description: json['description'],
       url: json['url'],
+      urlToImage: json['urlToImage'],
+      publishedAt: json['publishedAt'],
+      content: json['content'],
     );
   }
 }
