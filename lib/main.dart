@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:starwars/pages/Home.dart';
+import 'package:starwars/pages/home/home.dart';
+
 
 void main() {
   runApp(const MyApp());
