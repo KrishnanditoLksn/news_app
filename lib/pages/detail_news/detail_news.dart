@@ -33,7 +33,7 @@ class DetailNews extends StatelessWidget {
               ),
             ),
             SizedBox(height: 35),
-        
+
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
@@ -44,29 +44,33 @@ class DetailNews extends StatelessWidget {
             ),
 
             SizedBox(height: 35),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                detailNews.author!,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: const Color.fromARGB(255, 0, 0, 0),
-                  fontFamily: "Poppins",
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Padding(
+                padding: EdgeInsets.all(1),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    detailNews.author!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                      fontFamily: "Poppins",
+                    ),
+                  ),
                 ),
               ),
             ),
+
             SizedBox(height: 20),
-            Text(
-              detailNews.description!, 
-              style: TextStyle(fontSize: 19)
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Text(
+                detailNews.description!,
+                style: TextStyle(fontSize: 19),
+              ),
             ),
             SizedBox(height: 20),
-            // ElevatedButton(
-            //   onPressed: () => {
-
-            //   },
-            //   child: Text(detailNews.url!),
-            // ),
           ],
         ),
       ),
