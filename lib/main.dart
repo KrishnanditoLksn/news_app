@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starwars/pages/home/home.dart';
+import 'package:starwars/screens/home/home.dart';
 
 
 void main() {
@@ -10,6 +10,9 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyHome());
+    return MaterialApp(
+      home: MyHome(),
+      debugShowCheckedModeBanner: false
+      );
   }
 }
