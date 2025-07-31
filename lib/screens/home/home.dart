@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starwars/utils/custom_widget/custom_list_tile.dart';
+import 'package:starwars/utils/custom_widget/news_list_tile.dart';
 import 'package:starwars/data/model/news_model.dart';
 import 'package:starwars/services/api_service.dart';
 
