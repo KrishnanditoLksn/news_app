@@ -24,14 +24,16 @@ class News {
 
   factory News.fromJson(Map<String, dynamic> json) {
     return News(
-      source: DataSource.fromJson(json['source']),
-      author: json['author'],
-      title: json['title'],
-      description: json['description'],
-      url: json['url'],
-      urlToImage: json['urlToImage'],
+      source:json['source'] != null ? DataSource.fromJson(json['source']) : null,
+      author: json['author'] ?? "No Author Found",
+      title: json['title'] ?? "No Title Found",
+      description: json['description'] ?? "IYAKAH",
+      url: json['url'] ?? "PAAN SI",
+      urlToImage:
+          json['urlToImage'] ??
+          "https://unsplash.com/photos/a-stack-of-newspapers-sitting-on-top-of-each-other-6khMCoTlLG4",
       publishedAt: json['publishedAt'],
-      content: json['content'],
+      content: json['content'] ?? "No Data Found",
     );
   }
 }
