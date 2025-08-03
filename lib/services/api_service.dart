@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:starwars/api/api_key.dart';
+import 'package:starwars/services/api/api_key.dart';
 
-import 'package:starwars/model/news_model.dart';
+import 'package:starwars/data/model/news_model.dart';
 
 class ApiService {
   final baseUrl = "newsapi.org";
@@ -12,7 +12,7 @@ class ApiService {
   Future<List<News>> getNews() async {
     final queryParams = {
       'country': 'us',
-      'category': 'technology',
+      'category': 'health',
       'apikey': apikey,
     };
 
@@ -22,6 +22,19 @@ class ApiService {
     /*
     Decode json body
     */
+
+    Map<String, dynamic> json = jsonDecode(response.body);
+    List<dynamic> body = json['articles'];
+
+    List<News> news = body.map((dynamic item) => News.fromJson(item)).toList();
+    return news;
+  }
+
+  Future<List<News>> searchNews(String params) async {
+    final searchQueryParams = {'q': params, 'apikey': apikey};
+
+    final uri = Uri.https(baseUrl, '/v2/everything', searchQueryParams);
+    final response = await client.get(uri);
 
     Map<String, dynamic> json = jsonDecode(response.body);
     List<dynamic> body = json['articles'];
