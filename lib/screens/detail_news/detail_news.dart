@@ -82,7 +82,7 @@ class DetailNews extends StatelessWidget {
                         MaterialPageRoute(
                           builder:
                               (context) =>
-                                  NewsSummary(detailNews.title.toString()),
+                                  NewsSummary(detailNews.content!.toString()),
                         ),
                       ),
                     },
