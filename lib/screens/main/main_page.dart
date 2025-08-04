@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starwars/screens/home/home.dart';
-import 'package:starwars/screens/top_author/top_author.dart';
+import 'package:starwars/screens/notification/news_notification.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -12,10 +12,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
-  List<Widget> widgetList = <Widget>[
-    MyHome(), 
-    TopAuthor()
-  ];
+  List<Widget> widgetList = <Widget>[MyHome(),NewsNotification()];
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +20,15 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        showSelectedLabels: true,
+        showSelectedLabels: false,
+        showUnselectedLabels: true,
         items: [
           BottomNavigationBarItem(
-            label: "Home",
-            icon: Icon(Icons.home, 
-            color: Colors.green
-            )
+            label: "Health",
+            icon: Icon(Icons.health_and_safety, color: Colors.green),
           ),
           BottomNavigationBarItem(
-            label: "Author",
+            label: "Everything News",
             icon: Icon(
               Icons.topic,
               color: const Color.fromARGB(255, 91, 165, 144),
@@ -40,14 +36,14 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
 
-        //set state change when index is active while clicked 
+        //set state change when index is active while clicked
         onTap: (idx) {
           setState(() {
             _selectedIndex = idx;
           });
         },
       ),
-      body:widgetList.elementAt(_selectedIndex)
+      body: widgetList.elementAt(_selectedIndex),
     );
   }
 }
