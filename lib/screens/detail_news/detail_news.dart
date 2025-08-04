@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starwars/data/model/news_model.dart';
+import 'package:starwars/screens/summarize_news/news_summary.dart';
 
 class DetailNews extends StatelessWidget {
   final News detailNews;
@@ -70,9 +71,26 @@ class DetailNews extends StatelessWidget {
                   detailNews.content!,
                   style: TextStyle(fontSize: 18),
                 ),
-                
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 50),
+
+              ElevatedButton(
+                onPressed:
+                    () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) =>
+                                  NewsSummary(detailNews.title.toString()),
+                        ),
+                      ),
+                    },
+                child: Text(
+                  "Summarize this text",
+                  style: TextStyle(fontFamily: "Poppins", fontSize: 20),
+                ),
+              ),
             ],
           ),
         ),
