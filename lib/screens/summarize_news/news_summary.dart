@@ -19,14 +19,14 @@ class NewsSummary extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<String?> summary) {
           if (summary.hasData) {
             String newsSummary = summary.data!;
-            Container(
+            return Container(
               margin: EdgeInsets.all(8.0),
               child: Text(
                 newsSummary,
                 style: TextStyle(
                   fontFamily: "Poppins",
                   fontWeight: FontWeight.bold,
-                  fontSize: 25,
+                  fontSize: 20,
                 ),
               ),
             );
