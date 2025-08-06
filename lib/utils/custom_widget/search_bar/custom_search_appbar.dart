@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starwars/data/model/news_model.dart';
 import 'package:starwars/services/news_api_service.dart';
+import 'package:starwars/utils/custom_widget/item_not_found/item_not_found.dart';
 import 'package:starwars/utils/custom_widget/list_tile/news_list_tile.dart';
 import 'package:starwars/utils/custom_widget/search_page_instruct.dart';
 
@@ -31,7 +32,7 @@ class CustomSearchAppbar extends SearchDelegate {
         if (snapshot.hasData) {
           List<News>? newsItem = snapshot.data;
           if (newsItem!.isEmpty) {
-            return Text("Kosong asw");
+            return ItemNotFound();
           }
           return ListView.builder(
             itemCount: newsItem.length,
