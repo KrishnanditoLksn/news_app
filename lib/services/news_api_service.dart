@@ -16,30 +16,40 @@ class ApiService {
       'apikey': apikey,
     };
 
-    final uri = Uri.https(baseUrl, '/v2/top-headlines', queryParams);
-    final response = await client.get(uri);
+    try {
+      final uri = Uri.https(baseUrl, '/v2/top-headlines', queryParams);
+      final response = await client.get(uri);
+
+      Map<String, dynamic> json = jsonDecode(response.body);
+      List<dynamic> body = json['articles'];
+
+      List<News> news =
+          body.map((dynamic item) => News.fromJson(item)).toList();
+      return news;
+    } catch (e) {
+      throw Exception(e);
+    }
 
     /*
     Decode json body
     */
-
-    Map<String, dynamic> json = jsonDecode(response.body);
-    List<dynamic> body = json['articles'];
-
-    List<News> news = body.map((dynamic item) => News.fromJson(item)).toList();
-    return news;
   }
 
   Future<List<News>> searchNews(String params) async {
     final searchQueryParams = {'q': params, 'apikey': apikey};
 
-    final uri = Uri.https(baseUrl, '/v2/everything', searchQueryParams);
-    final response = await client.get(uri);
+    try {
+      final uri = Uri.https(baseUrl, '/v2/everything', searchQueryParams);
+      final response = await client.get(uri);
 
-    Map<String, dynamic> json = jsonDecode(response.body);
-    List<dynamic> body = json['articles'];
+      Map<String, dynamic> json = jsonDecode(response.body);
+      List<dynamic> body = json['articles'];
 
-    List<News> news = body.map((dynamic item) => News.fromJson(item)).toList();
-    return news;
+      List<News> news =
+          body.map((dynamic item) => News.fromJson(item)).toList();
+      return news;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }
