@@ -10,42 +10,76 @@ Widget customListTile(News news, BuildContext context) {
         MaterialPageRoute(builder: (context) => DetailNews(news)),
       );
     },
-    child: Container(
-      margin: EdgeInsets.all(12.0),
-      padding: EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
+    child: Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0)
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 200.00,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(news.urlToImage!),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.circular(12.0),
+          // Thumbnail Image
+          ClipRRect(
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(16.0),
+            ),
+            child: Image.network(
+              news.urlToImage ?? '',
+              height: 200,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              errorBuilder:
+                  (context, error, stackTrace) => Container(
+                    height: 200,
+                    color: Colors.grey[300],
+                    child: const Center(
+                      child: Icon(Icons.broken_image, size: 40),
+                    ),
+                  ),
             ),
           ),
-          SizedBox(height: 8.0),
-          Container(
-            padding: EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 91, 21, 16),
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            child: Text(
-              news.source!.name!,
-              style: TextStyle(color: Colors.white),
+
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Source / Category Tag
+                if (news.source?.name != null)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 6.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Text(
+                      news.source!.name!,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+
+                const SizedBox(height: 8),
+
+                // Title
+                Text(
+                  news.title ?? '',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    height: 1.3,
+                    color: Colors.black87,
+                  ),
+                ),
+              ],
             ),
           ),
-          SizedBox(height: 2.0),
-          Text(news.title!, style: TextStyle(color: Colors.blue)),
         ],
       ),
     ),
