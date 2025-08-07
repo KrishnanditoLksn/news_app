@@ -12,7 +12,10 @@ class NewsSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Summary Result")),
+      appBar: AppBar(
+        title: Text("Summary Result", style: TextStyle(fontFamily: "Poppins")),
+        backgroundColor: Colors.white,
+      ),
       backgroundColor: Colors.white,
       body: FutureBuilder(
         future: geminiService.getSummaryResult(newsTitle),
@@ -20,14 +23,32 @@ class NewsSummary extends StatelessWidget {
           if (summary.hasData) {
             String newsSummary = summary.data!;
             return Container(
-              margin: EdgeInsets.all(8.0),
+              margin: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 201, 189, 189),
+                borderRadius: BorderRadius.circular(12.0),
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8.0)],
+              ),
               child: Text(
                 newsSummary,
                 style: TextStyle(
                   fontFamily: "Poppins",
-                  fontWeight: FontWeight.bold,
                   fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black87,
+                  height: 1.5,
                 ),
+              ),
+            );
+          }
+          if (summary.hasError) {
+            return Text(
+              "Error ${summary.error}",
+              style: TextStyle(
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
             );
           }
