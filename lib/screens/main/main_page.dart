@@ -1,7 +1,7 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:starwars/screens/home/home.dart';
-import 'package:starwars/screens/notification/news_notification.dart';
+import 'package:starwars/screens/chatbot/news_chatbot.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -14,8 +14,6 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
   late PageController _pageController;
-
-  List<Widget> widgetList = <Widget>[MyHome(), NewsNotification()];
 
   @override
   void initState() {
@@ -36,7 +34,7 @@ class _MainPageState extends State<MainPage> {
                   _selectedIndex = value;
                 }),
               },
-          children: [MyHome(), NewsNotification()],
+          children: [MyHome(), ChatBotScreen()],
         ),
       ),
 
@@ -64,9 +62,9 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           BottomNavyBarItem(
-            title: Text("Settings", style: TextStyle(fontFamily: "Poppins")),
+            title: Text("Chatbot", style: TextStyle(fontFamily: "Poppins")),
             icon: Icon(
-              Icons.settings,
+              Icons.recommend,
               color: const Color.fromARGB(255, 1, 25, 18),
             ),
           ),
