@@ -7,10 +7,18 @@ class GeminiApiService {
   Future<String?> getSummaryResult(String title) async {
     return gemini
         .prompt(
-          parts: [Part.text("Using your knowledge , Provide a summary of $title")],
+          parts: [
+            Part.text("Using your knowledge , Provide a summary of $title"),
+          ],
         )
         .then((value) {
           return value?.output;
         });
+  }
+
+  Future<String?> chatbot(String title) async {
+    return gemini.prompt(parts: [Part.text(title)]).then((value) {
+      return value?.output;
+    });
   }
 }
