@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_core/flutter_chat_core.dart';
-import 'package:flutter_chat_core/flutter_chat_core.dart' as types;
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:starwars/data/model/chatter.dart';
-import 'package:starwars/services/api/gemini_api_service.dart';
+import 'package:provider/provider.dart';
+import 'package:starwars/provider/gemini_chat_provider.dart';
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({super.key});
@@ -13,32 +10,30 @@ class ChatBotScreen extends StatefulWidget {
 }
 
 class ChatBotState extends State<ChatBotScreen> {
-  final List<Chatter> _messages = [
-    Chatter(text: "Hallo", isUser: true),
-    Chatter(text: "Apakabar", isUser: false),
-  ];
   final TextEditingController _editingController = TextEditingController();
-  final service = GeminiApiService();
+  // final service = GeminiApiService();
 
-  Future<void> _chatGemini() async {
-    if (_editingController.text.isEmpty) return;
+  // Future<void> _chatGemini() async {
+  //   if (_editingController.text.isEmpty) return;
 
-    final String prompt = _editingController.text;
-    _editingController.clear();
+  //   final String prompt = _editingController.text;
+  //   _editingController.clear();
 
-    setState(() {
-      _messages.add(Chatter(text: prompt, isUser: true));
-    });
+  //   setState(() {
+  //     _messages.add(Chatter(text: prompt, isUser: true));
+  //   });
 
-    String? res = await service.chatbot(prompt);
+  //   String? res = await service.chatbot(prompt);
 
-    setState(() {
-      _messages.add(Chatter(text: res ?? '', isUser: false));
-    });
-  }
+  //   setState(() {
+  //     _messages.add(Chatter(text: res ?? '', isUser: false));
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final chatProvider = context.watch<GeminiChatProvider>();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -49,9 +44,9 @@ class ChatBotState extends State<ChatBotScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: _messages.length,
+              itemCount: chatProvider.messages.length,
               itemBuilder: (context, idx) {
-                final msg = _messages[idx];
+                final msg = chatProvider.messages[idx];
                 return ListTile(
                   title: Align(
                     alignment:
@@ -63,8 +58,8 @@ class ChatBotState extends State<ChatBotScreen> {
                       decoration: BoxDecoration(
                         color:
                             msg.isUser
-                                ? Colors.grey
-                                : const Color.fromARGB(255, 52, 39, 2),
+                                ? const Color.fromARGB(255, 128, 145, 178)
+                                : const Color.fromARGB(255, 25, 61, 170),
                         borderRadius:
                             msg.isUser
                                 ? BorderRadius.only(
@@ -84,7 +79,7 @@ class ChatBotState extends State<ChatBotScreen> {
                           color:
                               msg.isUser
                                   ? Colors.white
-                                  : const Color.fromARGB(255, 255, 187, 0),
+                                  : const Color.fromARGB(255, 255, 255, 255),
                           fontFamily: "Poppins",
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -102,7 +97,7 @@ class ChatBotState extends State<ChatBotScreen> {
             padding: EdgeInsets.only(bottom: 5, top: 14, left: 20, right: 10),
             child: Container(
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 136, 136, 136),
+                color: const Color.fromARGB(255, 215, 206, 206),
                 borderRadius: BorderRadius.circular(32),
               ),
 
@@ -121,7 +116,14 @@ class ChatBotState extends State<ChatBotScreen> {
                       ),
                     ),
                   ),
-                  IconButton(onPressed: _chatGemini, icon: Icon(Icons.send)),
+                  IconButton(
+                    onPressed: () {
+                      final prompt = _editingController.text;
+                      _editingController.clear();
+                      context.read()<GeminiChatProvider>().chatGemini(prompt);
+                    },
+                    icon: Icon(Icons.send),
+                  ),
                 ],
               ),
             ),
