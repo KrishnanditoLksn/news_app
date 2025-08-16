@@ -17,43 +17,47 @@ class NewsSummary extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       backgroundColor: Colors.white,
-      body: FutureBuilder(
-        future: geminiService.getSummaryResult(newsTitle),
-        builder: (BuildContext context, AsyncSnapshot<String?> summary) {
-          if (summary.hasData) {
-            String newsSummary = summary.data!;
-            return Container(
-              margin: EdgeInsets.all(16.0),
-              padding: EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 201, 189, 189),
-                borderRadius: BorderRadius.circular(12.0),
-                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8.0)],
-              ),
-              child: Text(
-                newsSummary,
+      body: SingleChildScrollView(
+        child: FutureBuilder(
+          future: geminiService.getSummaryResult(newsTitle),
+          builder: (BuildContext context, AsyncSnapshot<String?> summary) {
+            if (summary.hasData) {
+              String newsSummary = summary.data!;
+              return Container(
+                margin: EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 201, 189, 189),
+                  borderRadius: BorderRadius.circular(12.0),
+                  boxShadow: [
+                    BoxShadow(color: Colors.black12, blurRadius: 8.0),
+                  ],
+                ),
+                child: Text(
+                  newsSummary,
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black87,
+                    height: 1.5,
+                  ),
+                ),
+              );
+            }
+            if (summary.hasError) {
+              return Text(
+                "Error ${summary.error}",
                 style: TextStyle(
                   fontFamily: "Poppins",
+                  fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black87,
-                  height: 1.5,
                 ),
-              ),
-            );
-          }
-          if (summary.hasError) {
-            return Text(
-              "Error ${summary.error}",
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
+              );
+            }
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
     );
   }
