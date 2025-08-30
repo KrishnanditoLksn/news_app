@@ -37,16 +37,25 @@ class CustomOnboarding extends StatelessWidget {
           SizedBox(height: 100),
           Column(
             children: [
-              Text("Onboarding 1 "),
-              Text(onboardingTitle),
+              // Text("Onboarding 1 "),
+              Text(
+                onboardingTitle,
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+                // style: TextStyl,
+              ),
               SizedBox(height: 150),
-              // ElevatedButton(
-              //   onPressed: () => {},
-              //   child: Text(
-              //     "Summarize this text",
-              //     style: TextStyle(fontFamily: "Poppins", fontSize: 20),
-              //   ),
-              // ),
+              Text(
+                descriptionOnboarding,
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ],
