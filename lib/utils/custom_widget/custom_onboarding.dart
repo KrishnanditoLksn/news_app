@@ -17,8 +17,9 @@ class CustomOnboarding extends StatelessWidget {
       body: Column(
         children: [
           Container(
+            // margin: EdgeInsets.only(top: 10),
             width: 442,
-            height: 200,
+            height: 110,
             decoration: ShapeDecoration(
               gradient: LinearGradient(
                 begin: Alignment(-0.52, -0.63),
@@ -47,7 +48,7 @@ class CustomOnboarding extends StatelessWidget {
                 ),
                 // style: TextStyl,
               ),
-              SizedBox(height: 150),
+              SizedBox(height: 100),
               Text(
                 descriptionOnboarding,
                 style: TextStyle(
