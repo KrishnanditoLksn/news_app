@@ -32,7 +32,7 @@ class ChatBotState extends State<ChatBotScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final chatProvider = context.watch<GeminiChatProvider>();
+    final chatProvider = Provider.of<GeminiChatProvider>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -120,7 +120,7 @@ class ChatBotState extends State<ChatBotScreen> {
                     onPressed: () {
                       final prompt = _editingController.text;
                       _editingController.clear();
-                      context.read()<GeminiChatProvider>().chatGemini(prompt);
+                      context.read<GeminiChatProvider>().chatGemini(prompt);
                     },
                     icon: Icon(Icons.send),
                   ),
