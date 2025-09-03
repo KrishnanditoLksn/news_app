@@ -41,7 +41,7 @@ class MyHomeState extends State<MyHome> {
         ],
       ),
       body: FutureBuilder(
-        future: client.getNews(),
+        future: client.getNews(context),
         builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
           if (snapshot.hasData) {
             List<News>? articles = snapshot.data;

@@ -9,7 +9,7 @@ class ApiService {
   final baseUrl = "newsapi.org";
   final client = http.Client();
 
-  Future<List<News>> getNews() async {
+  Future<List<News>> getNews(context) async {
     final queryParams = {
       'country': 'us',
       'category': 'health',
